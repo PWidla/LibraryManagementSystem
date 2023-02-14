@@ -192,6 +192,30 @@ namespace LibraryManagementSystem.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+
+    //        #region AddTwoUsers
+    //        migrationBuilder.Sql(
+    //$@"INSERT INTO AspNetUsers (Id, FirstName, LastName, UserName, NormalizedUserName, 
+    //Email, NormalizedEmail, EmailConfirmed, PasswordHash, SecurityStamp, ConcurrencyStamp, 
+    //PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnd, LockoutEnabled, AccessFailedCount) 
+    //VALUES 
+    //('{User1Id}', 'Patryk', 'Widła', 'test@test.com', 'TEST@TEST.COM', 
+    //'test@test.com', 'TEST@TEST.COM', 0, 
+    //'AQAAAAEAACcQAAAAEAjUX9i/lAt9Cq89I88rV1Pu11TVTHJvdt6sDajU56e85mElz2WI4BhbDWzbjwk8gA==', 
+    //'YP434DY3ETNYRPI2RSLHMLVATVY5JYHF', 'b7503798-574e-4946-a32d-d203d151face', NULL, 0, 0, NULL, 1, 0);
+
+    //INSERT INTO AspNetUsers (Id, FirstName, LastName, UserName, NormalizedUserName, 
+    //Email, NormalizedEmail, EmailConfirmed, PasswordHash, SecurityStamp, ConcurrencyStamp, 
+    //PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnd, LockoutEnabled, AccessFailedCount) 
+    //VALUES 
+    //('{User2Id}', 'Eryk', 'Drożdżak', 'user@user.com', 'USER@USER.COM', 
+    //'user@user.com', 'USER@USER.COM', 0, 
+    //'AQAAAAEAACcQAAAAECXxGF9ohaxdbA2XbIdaqHqzB63yzBYrScs9zw/33DLaBEjDG3jv7CIR1KvqlIcC6A==',
+    //N'MDWEQE3WP2MDRKHDGESXQOF6A3FGLJXI', N'528a40bb-871c-4747-a382-f58173b5e893', NULL, 0, 0, NULL, 1, 0);");
+
+    //        #endregion
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
