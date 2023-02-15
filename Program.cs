@@ -19,8 +19,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-//builder.Services.AddDbContext<DataContext>(options =>
-//    options.UseSqlite(connectionString));
+
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlite(connectionString));
 
 builder.Services.AddControllersWithViews();
 
