@@ -11,11 +11,13 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 //    options.UseSqlite(connectionString));
 //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => 
+    options.UseSqlite(connectionString));
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+//builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 //builder.Services.AddDbContext<DataContext>(options =>
 //    options.UseSqlite(connectionString));
@@ -24,7 +26,7 @@ builder.Services.AddControllersWithViews();
 
 #region Authorization
 
-//AddAuthorizationPolicies();
+AddAuthorizationPolicies();
 
 #endregion
 
@@ -54,19 +56,13 @@ app.MapRazorPages();
 app.Run();
 
 
-//void AddAuthorizationPolicies()
-//{
-//    builder.Services.AddAuthorization(options =>
-//    {
-//        options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
-//    });
-
-//    builder.Services.AddAuthorization(options =>
-//    {
-//        options.AddPolicy(Constants.Policies.RequireAdmin, policy => policy.RequireRole(Constants.Roles.Administrator));
-//        options.AddPolicy(Constants.Policies.RequireManager, policy => policy.RequireRole(Constants.Roles.Manager));
-//    });
-//}
+void AddAuthorizationPolicies()
+{
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Administrator"));
+    });
+}
 
 //void AddScoped()
 //{

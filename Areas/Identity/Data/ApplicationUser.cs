@@ -8,4 +8,9 @@ namespace LibraryManagementSystem.Areas.Identity.Data
 
         public string LastName { get; set; }
     }
+
+    public class ApplicationRole : IdentityRole
+    {
+
+    }
 }
