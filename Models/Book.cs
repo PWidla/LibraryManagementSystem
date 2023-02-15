@@ -1,5 +1,4 @@
-﻿using DataAnnotationsExtensions;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryManagementSystem.Models
@@ -22,8 +21,7 @@ namespace LibraryManagementSystem.Models
         public Category? Category { get; set; }
 
         [Required(ErrorMessage = "Please enter release year")]
-        [Min(0)]
-        [Max(2023, ErrorMessage = "Release year must be less or equal to current year")]
+        [Range(0, 2023, ErrorMessage = "Release year must be between 0 and 2023")]
         [Display(Name = "Release year")]
         public int ReleaseYear { get; set; }
 
