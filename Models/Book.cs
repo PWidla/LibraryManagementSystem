@@ -12,7 +12,6 @@ namespace LibraryManagementSystem.Models
     public class Book
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Column(TypeName = "nvarchar(200)")]
@@ -33,10 +32,9 @@ namespace LibraryManagementSystem.Models
         //Foreign key
         [Required(ErrorMessage = "Please choose author")]
         [Display(Name = "Author")]
-        [ForeignKey("Author")]
         public int AuthorID { get; set; }
 
         [ForeignKey("AuthorID")]
-        public virtual Author? Author { get; set; }
+        public virtual Author Author { get; set; }
     }
 }

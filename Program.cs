@@ -11,6 +11,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 //    options.UseSqlite(connectionString));
 //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddDbContext<LibraryContext>(options =>
+    options.UseSqlite(connectionString));
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlite(connectionString));
 
@@ -20,10 +23,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddDbContext<LibraryContext>(options =>
-    options.UseSqlite(connectionString));
 
 builder.Services.AddControllersWithViews();
+
 
 #region Authorization
 
