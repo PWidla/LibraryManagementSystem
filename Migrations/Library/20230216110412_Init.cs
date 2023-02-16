@@ -4,7 +4,7 @@
 
 namespace LibraryManagementSystem.Migrations.Library
 {
-    public partial class InitLibrary : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
