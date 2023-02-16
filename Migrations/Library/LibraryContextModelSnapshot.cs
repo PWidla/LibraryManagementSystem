@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace LibraryManagementSystem.Migrations.Data
+namespace LibraryManagementSystem.Migrations.Library
 {
-    [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(LibraryContext))]
+    partial class LibraryContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace LibraryManagementSystem.Migrations.Data
 
                     b.HasKey("ID");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Author");
                 });
 
             modelBuilder.Entity("LibraryManagementSystem.Models.Book", b =>
@@ -61,7 +61,7 @@ namespace LibraryManagementSystem.Migrations.Data
 
                     b.HasIndex("AuthorID");
 
-                    b.ToTable("Books");
+                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("LibraryManagementSystem.Models.Book", b =>

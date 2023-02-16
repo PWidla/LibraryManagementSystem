@@ -20,7 +20,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddDbContext<DataContext>(options =>
+builder.Services.AddDbContext<LibraryContext>(options =>
     options.UseSqlite(connectionString));
 
 builder.Services.AddControllersWithViews();

@@ -1,0 +1,60 @@
+-- Add 5 authors
+INSERT INTO Author (FirstName, LastName) VALUES 
+('J.K.', 'Rowling'),
+('Stephen', 'King'),
+('Haruki', 'Murakami'),
+('Gillian', 'Flynn'),
+('George R.R.', 'Martin');
+
+-- Add 10 books
+INSERT INTO Book (Title, Category, ReleaseYear, IsAvailable, AuthorID) VALUES
+('Harry Potter and the Philosopher''s Stone', 'Fantasy', 1997, 1, 1),
+('Harry Potter and the Chamber of Secrets', 'Fantasy', 1998, 1, 1),
+('The Shining', 'Horror', 1977, 1, 2),
+('The Stand', 'Science Fiction', 1978, 1, 2),
+('Norwegian Wood', 'Fiction', 1987, 1, 3),
+('Kafka on the Shore', 'Fiction', 2002, 1, 3),
+('Gone Girl', 'Mystery', 2012, 1, 4),
+('Sharp Objects', 'Mystery', 2006, 1, 4),
+('A Game of Thrones', 'Fantasy', 1996, 1, 5),
+('A Clash of Kings', 'Fantasy', 1998, 1, 5);
+
+
+
+--
+
+using Microsoft.EntityFrameworkCore;
+using LibraryManagementSystem.Models;
+
+namespace LibraryManagementSystem.Data
+{
+    public class DataContext : DbContext
+    {
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+        }
+
+        public DbSet<Book> Books => Set<Book>();
+        public DbSet<Author> Authors => Set<Author>();
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=Library.db");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Author>().HasData(
+                new Author { Id = 1, Name = "J.K. Rowling" },
+                new Author { Id = 2, Name = "George R.R. Martin" },
+                new Author { Id = 3, Name = "Stephen King" }
+            );
+
+            modelBuilder.Entity<Book>().HasData(
+                new Book { Id = 1, Title = "Harry Potter and the Philosopher's Stone", AuthorId = 1 },
+                new Book { Id = 2, Title = "A Game of Thrones", AuthorId = 2 },
+                new Book { Id = 3, Title = "The Shining", AuthorId = 3 }
+            );
+        }
+    }
+}

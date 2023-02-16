@@ -8,6 +8,7 @@ namespace LibraryManagementSystem.Models
         Fiction, Adventure, Classics, Crime, Historical, Horror, Poetry, Romance, Science, Thriller, Autobiography, Biography
     }
 
+    [Table("Book")]
     public class Book
     {
         [Key]
@@ -32,6 +33,7 @@ namespace LibraryManagementSystem.Models
         //Foreign key
         [Required(ErrorMessage = "Please choose author")]
         [Display(Name = "Author")]
+        [ForeignKey("Author")]
         public int AuthorID { get; set; }
 
         [ForeignKey("AuthorID")]
