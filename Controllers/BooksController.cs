@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagementSystem.Controllers
 {
@@ -46,6 +47,7 @@ namespace LibraryManagementSystem.Controllers
         }
 
         // GET: Books/Create
+        [Authorize(Policy="RequireAdmin")]
         public IActionResult Create()
         {
             ViewBag.Authors = new SelectList(_context.Authors, "ID", "FullName");
@@ -55,6 +57,7 @@ namespace LibraryManagementSystem.Controllers
         // POST: Books/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Policy = "RequireAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title,Category,ReleaseYear,IsAvailable,AuthorID")] Book book)
@@ -71,6 +74,7 @@ namespace LibraryManagementSystem.Controllers
         }
 
         // GET: Books/Edit/5
+        [Authorize(Policy = "RequireAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Books == null)
@@ -90,6 +94,7 @@ namespace LibraryManagementSystem.Controllers
         // POST: Books/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Policy = "RequireAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Title,Category,ReleaseYear,IsAvailable,AuthorID")] Book book)
@@ -125,6 +130,7 @@ namespace LibraryManagementSystem.Controllers
         }
 
         // GET: Books/Delete/5
+        [Authorize(Policy = "RequireAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Books == null)
@@ -144,6 +150,7 @@ namespace LibraryManagementSystem.Controllers
         }
 
         // POST: Books/Delete/5
+        [Authorize(Policy = "RequireAdmin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
