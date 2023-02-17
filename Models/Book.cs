@@ -35,6 +35,6 @@ namespace LibraryManagementSystem.Models
         public int AuthorID { get; set; }
 
         [ForeignKey("AuthorID")]
-        public virtual Author Author { get; set; }
+        public virtual Author ?Author { get; set; }
     }
 }

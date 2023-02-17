@@ -57,10 +57,11 @@ namespace LibraryManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Category,ReleaseYear,IsAvailable,AuthorID")] Book book)
+        public async Task<IActionResult> Create([Bind("Title,Category,ReleaseYear,IsAvailable,AuthorID")] Book book)
         {
             if (ModelState.IsValid)
             {
+                book.IsAvailable = book.IsAvailable ? true : false;
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
