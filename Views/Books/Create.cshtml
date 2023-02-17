@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Create</h1>
@@ -18,11 +17,20 @@
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
+                <select asp-for="Category" class="form-control">
+                    <option value="">Select Category</option>
+                    @foreach (var item in Enum.GetValues(typeof(Category)))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
                 <label asp-for="ReleaseYear" class="control-label"></label>
                 <input asp-for="ReleaseYear" class="form-control" />
@@ -33,15 +41,20 @@
                     <input class="form-check-input" asp-for="IsAvailable" /> @Html.DisplayNameFor(model => model.IsAvailable)
                 </label>
             </div>
+
             <div class="form-group">
-                <label asp-for="AuthorID" class="control-label"></label>
-                <input asp-for="AuthorID" class="form-control" />
-                <span asp-validation-for="AuthorID" class="text-danger"></span>
+                <label asp-for="AuthorID"></label>
+                <select asp-for="AuthorID" class="form-control" asp-items="ViewBag.Authors" name="AuthorID"></select>
             </div>
+
+
+            <a class="nav-link text-dark" asp-area="" asp-controller="Authors" asp-action="Create">Author not listed? Add him by clicking this text.</a>
+
+
             @*<div class="form-group">
-            <label asp-for="AuthorID" class="control-label"></label>
-            <select asp-for="AuthorID" class ="form-control" asp-items="ViewBag.AuthorID"></select>
-        </div>*@
+                    <label asp-for="AuthorID" class="control-label"></label>
+                    <select asp-for="AuthorID" class="form-control" asp-items="ViewBag.AuthorID"></select>
+                </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

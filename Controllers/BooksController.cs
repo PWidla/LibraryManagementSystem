@@ -48,7 +48,7 @@ namespace LibraryManagementSystem.Controllers
         // GET: Books/Create
         public IActionResult Create()
         {
-            ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "FirstName");
+            ViewBag.Authors = new SelectList(_context.Authors, "ID", "FullName");
             return View();
         }
 
@@ -92,17 +92,18 @@ namespace LibraryManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Category,ReleaseYear,IsAvailable,AuthorID")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("Title,Category,ReleaseYear,IsAvailable,AuthorID")] Book book)
         {
-            if (id != book.ID)
-            {
-                return NotFound();
-            }
+            //if (id != book.ID)
+            //{
+            //    return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    book.ID = id;
                     _context.Update(book);
                     await _context.SaveChangesAsync();
                 }
