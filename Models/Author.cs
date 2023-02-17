@@ -11,10 +11,12 @@ namespace LibraryManagementSystem.Models
         public int ID { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
+        [Display(Name = "First name")]
         [Required(ErrorMessage = "Please enter the first name of the author")]
         public string FirstName { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
+        [Display(Name = "Last name")]
         [Required(ErrorMessage = "Please enter the last name of the author")]
         public string LastName { get; set; }
 
