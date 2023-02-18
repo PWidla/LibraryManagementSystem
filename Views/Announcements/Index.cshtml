@@ -33,10 +33,18 @@
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Content)
+                    @if (item.Content.Length > 100)
+                    {
+                        @item.Content.Substring(0, 100)
+                        <a href="@Url.Action("Details", new { id = item.ID })">... read more</a>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Content)
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreationDate)
+                    @item.CreationDate.ToString("yyyy-MM-dd")
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

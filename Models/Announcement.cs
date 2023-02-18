@@ -15,6 +15,7 @@ namespace LibraryManagementSystem.Models
 
         [Column(TypeName = "nvarchar(2000)")]
         [Required(ErrorMessage = "Please enter Content")]
+        [MinLength(20)]
         public string Content { get; set; }
 
         [Display(Name = "Date of creation")]
