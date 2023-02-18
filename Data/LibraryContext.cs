@@ -14,6 +14,5 @@ namespace LibraryManagementSystem.Data
         public DbSet<Author> Authors => Set<Author>();
         public DbSet<Genre> Genres => Set<Genre>();
         public DbSet<Announcement> Announcements => Set<Announcement>();
-
     }
 }
