@@ -56,13 +56,13 @@ namespace LibraryManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Name")] Genre genre)
         {
+            if (_context.Genres.Any(g => g.Name == genre.Name))
+            {
+                ModelState.AddModelError("Name", "A genre with this name already exists");
+            }
+
             if (ModelState.IsValid)
             {
-                if (_context.Genres.Any(g => g.Name == genre.Name))
-                {
-                    ModelState.AddModelError("Name", "This genre already exists");
-                    return View(genre);
-                }
                 _context.Add(genre);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -93,6 +93,11 @@ namespace LibraryManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name")] Genre genre)
         {
+            if (_context.Genres.Any(g => g.Name == genre.Name && g.ID != genre.ID))
+            {
+                ModelState.AddModelError("Name", "A genre with this name already exists");
+            }
+
             if (id != genre.ID)
             {
                 return NotFound();
@@ -100,12 +105,6 @@ namespace LibraryManagementSystem.Controllers
 
             if (ModelState.IsValid)
             {
-                if (_context.Genres.Any(g => g.Name == genre.Name && g.ID != genre.ID))
-                {
-                    ModelState.AddModelError("Name", "This genre already exists");
-                    return View(genre);
-                }
-
                 try
                 {
                     _context.Update(genre);

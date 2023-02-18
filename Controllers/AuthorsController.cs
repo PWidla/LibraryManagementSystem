@@ -57,13 +57,13 @@ namespace LibraryManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,FirstName,LastName")] Author author)
         {
+            if (_context.Authors.Any(g => g.FirstName == author.FirstName && g.LastName == author.LastName))
+            {
+                ModelState.AddModelError("LastName", "An author with this data already exists");
+            }
+
             if (ModelState.IsValid)
             {
-                if (_context.Authors.Any(g => g.FirstName == author.FirstName && g.LastName == author.LastName))
-                {
-                    ModelState.AddModelError("Name", "This author already exists");
-                    return View(author);
-                }
                 _context.Add(author);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,6 +94,11 @@ namespace LibraryManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName")] Author author)
         {
+            if (_context.Authors.Any(g => g.FirstName == author.FirstName && g.LastName == author.LastName && g.ID != author.ID))
+            {
+                ModelState.AddModelError("LastName", "An author with this data already exists");
+            }
+
             if (id != author.ID)
             {
                 return NotFound();
@@ -101,12 +106,6 @@ namespace LibraryManagementSystem.Controllers
 
             if (ModelState.IsValid)
             {
-                if (_context.Authors.Any(g => g.FirstName == author.FirstName && g.LastName == author.LastName && g.ID != author.ID))
-                {
-                    ModelState.AddModelError("Name", "This author already exists");
-                    return View(author);
-                }
-
                 try
                 {
                     _context.Update(author);
