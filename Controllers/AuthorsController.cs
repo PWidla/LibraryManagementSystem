@@ -59,6 +59,11 @@ namespace LibraryManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_context.Authors.Any(g => g.FirstName == author.FirstName && g.LastName == author.LastName))
+                {
+                    ModelState.AddModelError("Name", "This author already exists");
+                    return View(author);
+                }
                 _context.Add(author);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -96,6 +101,12 @@ namespace LibraryManagementSystem.Controllers
 
             if (ModelState.IsValid)
             {
+                if (_context.Authors.Any(g => g.FirstName == author.FirstName && g.LastName == author.LastName && g.ID != author.ID))
+                {
+                    ModelState.AddModelError("Name", "This author already exists");
+                    return View(author);
+                }
+
                 try
                 {
                     _context.Update(author);

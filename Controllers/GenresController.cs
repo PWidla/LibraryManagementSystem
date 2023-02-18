@@ -58,6 +58,11 @@ namespace LibraryManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_context.Genres.Any(g => g.Name == genre.Name))
+                {
+                    ModelState.AddModelError("Name", "This genre already exists");
+                    return View(genre);
+                }
                 _context.Add(genre);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -95,6 +100,12 @@ namespace LibraryManagementSystem.Controllers
 
             if (ModelState.IsValid)
             {
+                if (_context.Genres.Any(g => g.Name == genre.Name && g.ID != genre.ID))
+                {
+                    ModelState.AddModelError("Name", "This genre already exists");
+                    return View(genre);
+                }
+
                 try
                 {
                     _context.Update(genre);

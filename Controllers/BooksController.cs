@@ -62,6 +62,11 @@ namespace LibraryManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Title,ReleaseYear,IsAvailable,GenreID,AuthorID")] Book book)
         {
+            if (_context.Books.Any(g => g.Title == book.Title))
+            {
+                ModelState.AddModelError("Title", "A book with this title already exists");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(book);
@@ -98,6 +103,11 @@ namespace LibraryManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Title,ReleaseYear,IsAvailable,GenreID,AuthorID")] Book book)
         {
+            if (_context.Books.Any(g => g.Title == book.Title && g.ID != book.ID))
+            {
+                ModelState.AddModelError("Title", "A book with this title already exists");
+            }
+
             if (id != book.ID)
             {
                 return NotFound();
