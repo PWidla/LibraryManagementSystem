@@ -57,10 +57,11 @@ namespace LibraryManagementSystem.Controllers
         [Authorize(Policy = "RequireAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Content,CreationDate")] Announcement announcement)
+        public async Task<IActionResult> Create([Bind("ID,Title,Content")] Announcement announcement)
         {
             if (ModelState.IsValid)
             {
+                announcement.CreationDate = DateOnly.FromDateTime(DateTime.Now);
                 _context.Add(announcement);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -91,7 +92,7 @@ namespace LibraryManagementSystem.Controllers
         [Authorize(Policy = "RequireAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Content,CreationDate")] Announcement announcement)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Content")] Announcement announcement)
         {
             if (id != announcement.ID)
             {

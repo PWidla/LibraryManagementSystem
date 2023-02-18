@@ -32,7 +32,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link active" asp-area="" asp-controller="Announcements" asp-action="Index">Announcements</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Books" asp-action="Index">Books</a>
@@ -40,16 +40,19 @@
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Authors" asp-action="Index">Authors</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-area="" asp-controller="Genres" asp-action="Index">Genres</a>
+                        </li>
                         @*<li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-            </li>*@
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+        </li>*@
                     </ul>
                     <partial name="_LoginPartial" />
                     @*<form class="d-flex">
@@ -66,11 +69,11 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @*<footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - LibraryManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
 
