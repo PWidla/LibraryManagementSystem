@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4 mx-auto">
-        <form asp-action="Create">
+        <form asp-action="Create" id="announcement-form-create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -24,10 +24,10 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                <label asp-for="CreationDate" class="control-label"></label>
-                <input asp-for="CreationDate" class="form-control" />
-                <span asp-validation-for="CreationDate" class="text-danger"></span>
-            </div>*@
+                    <label asp-for="CreationDate" class="control-label"></label>
+                    <input asp-for="CreationDate" class="form-control" />
+                    <span asp-validation-for="CreationDate" class="text-danger"></span>
+                </div>*@
             <div class="form-group d-flex justify-content-center">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
