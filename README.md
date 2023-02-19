@@ -18,7 +18,9 @@ This is a simple library management system built using .NET 6. It allows users t
 - Update-Database update -context ApplicationDbContext`
 - Update-Database update -context LibraryContext`
 
-4. Run the application
+4. Run the application by clicking 
+![image](https://user-images.githubusercontent.com/89644623/219941195-d99f7232-ca28-453e-8ccb-6127ee06ca80.png)
+
 
 ## Configuration
 
