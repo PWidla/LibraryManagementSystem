@@ -11,7 +11,7 @@ This is a simple library management system built using .NET 6. It allows users t
 
 1. Clone the repository: `git clone https://github.com/PWidla/LibraryManagementSystem.git`
 2. In Package Manager Console run the migrations:
-- Add-Migration add init -context ApplicationDbContext
+- Add-Migration init -context ApplicationDbContext
 - Add-Migration init -context LibraryContext
 
 3. Initialize the database: 
