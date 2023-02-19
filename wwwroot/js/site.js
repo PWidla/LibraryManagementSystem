@@ -196,3 +196,65 @@ $('#book-form-edit').submit(function (e) {
         }
     });
 });
+
+
+// Author create form validation
+$('#author-form-create').submit(function (e) {
+    e.preventDefault();
+    var firstName = $.trim($('#FirstName').val());
+    var lastName = $.trim($('#LastName').val());
+    if (firstName.length == 0) {
+        alert('Please enter the first name of the author.');
+        return;
+    }
+    if (lastName.length == 0) {
+        alert('Please enter the last name of the author.');
+        return;
+    }
+
+    var formData = new FormData(this);
+    $.ajax({
+        url: '/Authors/Create',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            window.location.href = '/Authors/Index';
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        }
+    });
+});
+
+
+// Author edit form validation
+$('#author-form-edit').submit(function (e) {
+    e.preventDefault();
+    var firstName = $.trim($('#FirstName').val());
+    var lastName = $.trim($('#LastName').val());
+    if (firstName.length == 0) {
+        alert('Please enter the first name of the author.');
+        return;
+    }
+    if (lastName.length == 0) {
+        alert('Please enter the last name of the author.');
+        return;
+    }
+
+    var formData = new FormData(this);
+    $.ajax({
+        url: '/Authors/Edit',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            window.location.href = '/Authors/Index';
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        }
+    });
+});
