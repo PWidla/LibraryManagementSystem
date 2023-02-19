@@ -10,12 +10,13 @@ This is a simple library management system built using .NET 6. It allows users t
 ## Installation
 
 1. Clone the repository: `git clone https://github.com/PWidla/LibraryManagementSystem.git`
-2. Navigate to the project directory: `cd LibraryManagementSystem`
-3. Run the migrations:
--dotnet ef migrations add init -context LibraryContext
--dotnet ef migrations add init -context ApplicationDbContext
+2. In Package Manager Console run the migrations:
+-Add-Migration add init -context ApplicationDbContext
+-Add-Migration init -context LibraryContext
 
-Initialize the databases: `dotnet ef database update`
+3. Initialize the database: 
+-Update-Database update -context ApplicationDbContext`
+-Update-Database update -context LibraryContext`
 
 4. Run the application
 
