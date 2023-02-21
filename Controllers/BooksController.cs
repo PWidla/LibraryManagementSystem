@@ -21,10 +21,30 @@ namespace LibraryManagementSystem.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
             var libraryContext = _context.Books.Include(b => b.Author).Include(b => b.Genre);
-            return View(await libraryContext.ToListAsync());
+
+            ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["YearSortParm"] = sortOrder == "Year" ? "year_release" : "Year";
+            var books = from b in libraryContext
+                        select b;
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    books = books.OrderByDescending(b => b.Title);
+                    break;
+                case "Year":
+                    books = books.OrderBy(b => b.ReleaseYear);
+                    break;
+                case "year_desc":
+                    books = books.OrderByDescending(b => b.ReleaseYear);
+                    break;
+                default:
+                    books = books.OrderBy(b => b.Title);
+                    break;
+            }
+            return View(await books.AsNoTracking().ToListAsync());
         }
 
         // GET: Books/Details/5
@@ -174,14 +194,15 @@ namespace LibraryManagementSystem.Controllers
             {
                 _context.Books.Remove(book);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool BookExists(int id)
         {
-          return _context.Books.Any(e => e.ID == id);
+            return _context.Books.Any(e => e.ID == id);
         }
     }
 }
+

@@ -14,10 +14,12 @@
     <thead class="thead-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParm"]">@Html.DisplayNameFor(model => model.Title)</a>
+                @*@Html.DisplayNameFor(model => model.Title)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReleaseYear)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParm"]">@Html.DisplayNameFor(model => model.ReleaseYear)</a>
+                @*@Html.DisplayNameFor(model => model.ReleaseYear)*@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsAvailable)
@@ -62,3 +64,4 @@
         }
     </tbody>
 </table>
+
