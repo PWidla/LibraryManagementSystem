@@ -21,10 +21,30 @@ namespace LibraryManagementSystem.Controllers
         }
 
         // GET: Authors
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-              return View(await _context.Authors.ToListAsync());
+            ViewData["LastNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
+            ViewData["FirstNameSortParm"] = sortOrder == "FirstName" ? "firstname_desc" : "FirstName";
+            var authors = from a in _context.Authors
+                           select a;
+            switch (sortOrder)
+            {
+                case "lastname_desc":
+                    authors = authors.OrderByDescending(a => a.LastName);
+                    break;
+                case "FirstName":
+                    authors = authors.OrderBy(a => a.FirstName);
+                    break;
+                case "firstname_desc":
+                    authors = authors.OrderByDescending(s => s.FirstName);
+                    break;
+                default:
+                    authors = authors.OrderBy(s => s.LastName);
+                    break;
+            }
+            return View(await authors.AsNoTracking().ToListAsync());
         }
+
 
         // GET: Authors/Details/5
         public async Task<IActionResult> Details(int? id)
