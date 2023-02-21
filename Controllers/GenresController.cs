@@ -21,9 +21,21 @@ namespace LibraryManagementSystem.Controllers
         }
 
         // GET: Genres
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-              return View(await _context.Genres.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var genres = from g in _context.Genres
+                           select g;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    genres = genres.OrderByDescending(s => s.Name);
+                    break;
+                default:
+                    genres = genres.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(await genres.AsNoTracking().ToListAsync());
         }
 
         // GET: Genres/Details/5
