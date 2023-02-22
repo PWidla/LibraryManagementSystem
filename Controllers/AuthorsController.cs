@@ -36,12 +36,14 @@ namespace LibraryManagementSystem.Controllers
             //    authors = authors.Where(a => a.FirstName.ToLowerInvariant().Contains(searchStringLower)
             //                               || a.LastName.ToLowerInvariant().Contains(searchStringLower)); 
             //}
-            
+
             if (!String.IsNullOrEmpty(searchString))
             {
-                authors = authors.Where(a => a.FirstName.Contains(searchString)
-                                       || a.LastName.Contains(searchString));
+                string searchStringLower = searchString.ToLower(); // sprowadź wprowadzony input do małych liter
+                authors = authors.Where(a => a.FirstName.ToLower().Contains(searchStringLower)
+                                           || a.LastName.ToLower().Contains(searchStringLower));
             }
+
 
             switch (sortOrder)
             {
