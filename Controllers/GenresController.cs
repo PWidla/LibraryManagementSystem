@@ -21,11 +21,21 @@ namespace LibraryManagementSystem.Controllers
         }
 
         // GET: Genres
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
+
             var genres = from g in _context.Genres
                            select g;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                string searchStringLower = searchString.ToLower(); // sprowadź wprowadzony input do małych liter
+                genres = genres.Where(g => g.Name.ToLower().Contains(searchStringLower));
+            }
+
+
             switch (sortOrder)
             {
                 case "name_desc":
