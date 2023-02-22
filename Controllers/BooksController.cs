@@ -34,7 +34,7 @@ namespace LibraryManagementSystem.Controllers
             {
                 searchString = searchString.ToLower();
                 books = books.Where(b => b.Title.ToLower().Contains(searchString)
-                                    || b.ReleaseYear.ToString().Equals(searchString)
+                                    //|| b.ReleaseYear.ToString().Equals(searchString)
                                     || b.Author.FirstName.ToLower().Contains(searchString)
                                     || b.Author.LastName.ToLower().Contains(searchString)
                 );
