@@ -21,7 +21,7 @@ namespace LibraryManagementSystem.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             var libraryContext = _context.Books.Include(b => b.Author).Include(b => b.Genre);
 
@@ -29,6 +29,14 @@ namespace LibraryManagementSystem.Controllers
             ViewData["YearSortParm"] = sortOrder == "Year" ? "year_release" : "Year";
             var books = from b in libraryContext
                         select b;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(b => b.Title.Contains(searchString)
+                                       || b.ReleaseYear.Equals(searchString)
+                                       || b.Author.FullName.Contains(searchString));
+            }
+
             switch (sortOrder)
             {
                 case "title_desc":

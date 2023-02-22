@@ -21,12 +21,28 @@ namespace LibraryManagementSystem.Controllers
         }
 
         // GET: Authors
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["LastNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
             ViewData["FirstNameSortParm"] = sortOrder == "FirstName" ? "firstname_desc" : "FirstName";
+            ViewData["CurrentFilter"] = searchString;
+
             var authors = from a in _context.Authors
                            select a;
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    string searchStringLower = searchString.ToLowerInvariant(); 
+            //    authors = authors.Where(a => a.FirstName.ToLowerInvariant().Contains(searchStringLower)
+            //                               || a.LastName.ToLowerInvariant().Contains(searchStringLower)); 
+            //}
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                authors = authors.Where(a => a.FirstName.Contains(searchString)
+                                       || a.LastName.Contains(searchString));
+            }
+
             switch (sortOrder)
             {
                 case "lastname_desc":
