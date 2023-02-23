@@ -55,3 +55,8 @@
         }
     </tbody>
 </table>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-warning">@ViewBag.Message</div>
+}

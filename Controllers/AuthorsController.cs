@@ -60,6 +60,11 @@ namespace LibraryManagementSystem.Controllers
                     authors = authors.OrderBy(s => s.LastName);
                     break;
             }
+            if (authors.Count() == 0)
+            {
+                ViewBag.Message = "No results.";
+            }
+
             return View(await authors.AsNoTracking().ToListAsync());
         }
 
