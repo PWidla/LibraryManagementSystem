@@ -20,7 +20,6 @@ namespace LibraryManagementSystem.Controllers
             _context = context;
         }
 
-        // GET: Books
         public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             var libraryContext = _context.Books.Include(b => b.Author).Include(b => b.Genre);
@@ -40,8 +39,6 @@ namespace LibraryManagementSystem.Controllers
                 );
             }
 
-
-
             switch (sortOrder)
             {
                 case "title_desc":
@@ -57,8 +54,15 @@ namespace LibraryManagementSystem.Controllers
                     books = books.OrderBy(b => b.Title);
                     break;
             }
+
+            if (books.Count() == 0)
+            {
+                ViewBag.Message = "No results.";
+            }
+
             return View(await books.AsNoTracking().ToListAsync());
         }
+
 
         // GET: Books/Details/5
         public async Task<IActionResult> Details(int? id)

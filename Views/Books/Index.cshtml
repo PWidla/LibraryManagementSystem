@@ -69,9 +69,12 @@
                         <button type="submit" class="btn btn-sm btn-danger mx-1">Delete</button>
                     </form>
                 </td>
-
             </tr>
         }
     </tbody>
 </table>
 
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-warning">@ViewBag.Message</div>
+}
