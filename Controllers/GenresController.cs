@@ -32,7 +32,8 @@ namespace LibraryManagementSystem.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 string searchStringLower = searchString.ToLower(); // sprowadź wprowadzony input do małych liter
-                genres = genres.Where(g => g.Name.ToLower().Contains(searchStringLower));
+                //genres = genres.Where(g => g.Name.ToLower().Contains(searchStringLower));
+                genres = genres.Where(g => g.Name.ToLower().Equals(searchStringLower));
             }
 
 

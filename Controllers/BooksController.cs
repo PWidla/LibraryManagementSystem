@@ -33,10 +33,10 @@ namespace LibraryManagementSystem.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 searchString = searchString.ToLower();
-                books = books.Where(b => b.Title.ToLower().Contains(searchString)
+                books = books.Where(b => b.Title.ToLower().Equals(searchString)
                                     //|| b.ReleaseYear.ToString().Equals(searchString)
-                                    || b.Author.FirstName.ToLower().Contains(searchString)
-                                    || b.Author.LastName.ToLower().Contains(searchString)
+                                    || b.Author.FirstName.ToLower().Equals(searchString)
+                                    || b.Author.LastName.ToLower().Equals(searchString)
                 );
             }
 

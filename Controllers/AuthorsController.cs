@@ -40,8 +40,8 @@ namespace LibraryManagementSystem.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 string searchStringLower = searchString.ToLower(); // sprowadź wprowadzony input do małych liter
-                authors = authors.Where(a => a.FirstName.ToLower().Contains(searchStringLower)
-                                           || a.LastName.ToLower().Contains(searchStringLower));
+                authors = authors.Where(a => a.FirstName.ToLower().Equals(searchStringLower)
+                                           || a.LastName.ToLower().Equals(searchStringLower));
             }
 
 
