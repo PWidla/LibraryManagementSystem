@@ -46,6 +46,12 @@ namespace LibraryManagementSystem.Controllers
                     genres = genres.OrderBy(s => s.Name);
                     break;
             }
+
+            if (genres.Count() == 0)
+            {
+                ViewBag.Message = "No results.";
+            }
+
             return View(await genres.AsNoTracking().ToListAsync());
         }
 
