@@ -20,7 +20,7 @@ namespace LibraryManagementSystem.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, bool searchByTitle = false, bool searchByAuthor = false)
         {
             var libraryContext = _context.Books.Include(b => b.Author).Include(b => b.Genre);
 
@@ -32,11 +32,23 @@ namespace LibraryManagementSystem.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 searchString = searchString.ToLower();
-                books = books.Where(b => b.Title.ToLower().Equals(searchString)
-                                    //|| b.ReleaseYear.ToString().Equals(searchString)
-                                    || b.Author.FirstName.ToLower().Equals(searchString)
-                                    || b.Author.LastName.ToLower().Equals(searchString)
-                );
+
+                if (searchByTitle && searchByAuthor || !searchByTitle && !searchByAuthor)
+                {
+                    books = books.Where(b => b.Title.ToLower().Equals(searchString) ||
+                                              b.Author.FirstName.ToLower().Equals(searchString) ||
+                                              b.Author.LastName.ToLower().Equals(searchString));
+                }
+                else if (searchByTitle)
+                {
+                    books = books.Where(b => b.Title.ToLower().Equals(searchString));
+                }
+                else if (searchByAuthor)
+                {
+                    books = books.Where(b => b.Author.FirstName.ToLower().Equals(searchString) 
+                                        || b.Author.LastName.ToLower().Equals(searchString));
+                }
+
             }
 
             switch (sortOrder)
