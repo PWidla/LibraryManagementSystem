@@ -20,12 +20,25 @@ namespace LibraryManagementSystem.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString, bool searchByTitle = false, bool searchByAuthor = false)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, bool searchByTitle = false, bool searchByAuthor = false, int? pageNumber)
         {
             var libraryContext = _context.Books.Include(b => b.Author).Include(b => b.Genre);
 
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewData["YearSortParm"] = sortOrder == "Year" ? "year_release" : "Year";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
             var books = from b in libraryContext
                         select b;
 
@@ -72,7 +85,9 @@ namespace LibraryManagementSystem.Controllers
                 ViewBag.Message = "No results.";
             }
 
-            return View(await books.AsNoTracking().ToListAsync());
+            int pageSize = 3;
+            return View(await PaginatedList<Book>.CreateAsync(books.AsNoTracking(), pageNumber ?? 1, pageSize));
+            //return View(await books.AsNoTracking().ToListAsync());
         }
 
 
