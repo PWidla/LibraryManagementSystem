@@ -20,7 +20,7 @@ namespace LibraryManagementSystem.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, bool searchByTitle = false, bool searchByAuthor = false, int? pageNumber)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, bool searchByTitle = false, bool searchByAuthor = false, int? pageNumber = 1)
         {
             var libraryContext = _context.Books.Include(b => b.Author).Include(b => b.Genre);
 
@@ -85,7 +85,7 @@ namespace LibraryManagementSystem.Controllers
                 ViewBag.Message = "No results.";
             }
 
-            int pageSize = 3;
+            int pageSize = 7;
             return View(await PaginatedList<Book>.CreateAsync(books.AsNoTracking(), pageNumber ?? 1, pageSize));
             //return View(await books.AsNoTracking().ToListAsync());
         }
