@@ -1,6 +1,6 @@
 # Library Management System
 
-This is a simple library management system built using .NET 6. It allows users to manage books, authors, genres, and book listings. The application uses two databases: `Library.db` for the library-related data and `Application.db` for user authentication and authorization.
+This is a simple library management system built using .NET 6. It allows users to manage books, authors, genres, and book listings. The application uses SQLite database.
 
 ## Requirements
 
